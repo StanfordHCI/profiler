@@ -1,0 +1,55 @@
+<html>
+<head>
+    <title>Query Test</title>
+    <script type="text/javascript" src="../../lib/protovis-r3.2.js"></script>
+    <script type="text/javascript" src="../../datavore-d0.1.js"></script>
+    <style>html * { font-family: Monaco, Courier New; }</style>
+</head>
+<body><div id="center"><div id="fig">
+
+<script type="text/javascript">
+
+var __t__;
+function tick() { __t__ = Date.now(); }
+function tock(n) { return ((Date.now() - __t__)/1000).toFixed(n||3); }
+function randn(n) { return Math.max(0, Math.floor(n*(Math.random()-0.001))); }
+function out(s) { document.write(s+"<br/>"); }
+function fx(x) { return x.toFixed(3); };
+
+tick();
+
+var N = 100, X = 10000,
+    am = ["a","b","c"],
+    bm = pv.range(1,6),
+    rows = pv.range(0,N).map(function() {
+	    var a = randn(am.length);
+    	var b = randn(bm.length);
+	    return {a:am[a],
+		        b:bm[b],
+		        x:randn(X)};
+    }).sort(function(a,b) {return a.a==b.a ? a.b-b.b : a.a < b.a ? -1 : 1;}),
+    cols = rows.reduce(function(c,o) {
+        c[0].push(o.a); c[1].push(o.b); c[2].push(o.x);
+        return c;
+    }, [[],[],[]]);
+
+var names = ["a","b","x"];
+var types = ["nominal","nominal","numeric"];
+cols = cols.map(function(d,i) { return {name:names[i], type:types[i], values:d}; });
+var data = dv.table(cols);
+out("build(1M): "+tock());
+
+var r;
+pv.range(0,5).map(function() {
+	tick();
+	r = data.query({
+		dims:[0,1],
+		vals:[dv.sum("x"), dv.count("x"), dv.avg("x"), dv.stdev("x")]
+	});
+	out("query(1M): "+tock());
+});
+//dv.min("x"), dv.max("x")]
+</script>
+
+</div></div></body>
+</html>

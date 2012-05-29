@@ -1,0 +1,22 @@
+<script type="text/javascript" src="../datatype-d0.1.js"></script>
+
+<script type="text/javascript">  
+
+var myLayout; 
+
+//$(document).ready(function() {
+
+  var inttype = dt.type.integer();
+  
+  if(inttype.parse(5)!=5) console.error('failed');
+  if(inttype.parse(5.2)!=dt.ERROR) console.error('failed');
+  if(inttype.parse('')!=dt.MISSING) console.error('failed');
+
+
+  // if(x.parse("1+2+(3*4)").evaluate() != 15) console.error("Math failed");
+  // if(x.parse("1-2+(3*4)").evaluate() != 11) console.error("Math failed");
+  // if(x.parse("a+bcd") === undefined) console.error("Math failed");
+  z = (dt.math.parse("a+bc"))
+  // y = (x.parse("3+4"))
+//})
+</script>

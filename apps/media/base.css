@@ -1,0 +1,101 @@
+/**
+ *	Basic Layout Theme
+ * 
+ *	This theme uses the default layout class-names for all classes
+ *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+ */
+
+.ui-layout-pane { /* all 'panes' */ 
+	background: #FFF; 
+	border: 1px solid #BBB; 
+	padding: 10px; 
+	overflow: auto;
+} 
+
+.ui-layout-resizer { /* all 'resizer-bars' */ 
+  width: 1px;
+  visibility:invisible;
+	background: #DDD; 
+} 
+
+.ui-layout-toggler { /* all 'toggler-buttons' */ 
+	background: #AAA; 
+} 
+
+table{
+	font-family: Monaco, 'Courier New';
+	overflow-y:auto;
+	border-collapse: collapse;
+}
+
+tr.even{
+	background-color:#ffffff;
+}
+
+tr.odd{
+	background-color:#ffffff;
+}
+
+th.header{
+	max-width:10px;
+}
+
+th{
+/*	background-color:#EFEFEF;*/
+	border:1px solid #ABABAB;
+	height:19px;
+	max-height:19px;
+	cursor:pointer;
+	border-collapse: collapse;
+	font-family: 'Lucida Grande', Helvetica, Arial;
+	font-size: 12px;
+}
+
+td.header{
+	background-color: #EFEFEF;
+	max-width:10px;
+	width:10px;
+	cursor:hand;
+	cursor: pointer;
+	font-family: 'Lucida Grande', Helvetica, Arial;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: right;
+}
+
+td{
+	border:1px solid #ABABAB;
+	height:22px;
+	max-height:22px;
+	empty-cells:show;
+	font-family: Monaco, 'Courier New';
+	font-size: 12px;
+	max-height: 16px;
+	min-height: 16px;
+	border-collapse: collapse;
+	overflow: hidden;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+table.display thead th {
+	border-bottom: 1px solid #ABABAB;
+}
+
+td, th {
+	overflow:hidden;
+}
+
+/*select{
+  font-family: 'Lucida Grande', Helvetica, Arial;
+  font-size: 16px;
+	display: inline-block;
+	width: 210px;
+	height: 26px;
+	padding: 4px;
+	font-size: 13px;
+	color: gray;
+	border: 1px solid #CCC;
+	-webkit-border-radius: 1px;
+}*/
+

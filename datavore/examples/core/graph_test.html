@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>Performance</title>
+    <script type="text/javascript" src="../../lib/protovis-r3.2.js"></script>
+    <script type="text/javascript" src="../../datavore-d0.1.js"></script>
+    <style>html * { font-family: Monaco, Courier; font-size: 12px; }</style>
+</head>
+<body><div id="center"><div id="fig">
+
+<script type="text/javascript">
+
+var __t__;
+function tick() { __t__ = Date.now(); }
+function tock(n) { return ((Date.now() - __t__)/1000).toFixed(n||3); }
+function randn(n) { return Math.max(0, Math.floor(n*(Math.random()-0.001))); }
+function out(s) { document.write(s+"<br/>"); }
+function fx(x) { return x.toFixed(3); };
+
+tick();
+var N = 1000, k = 10, i, j, src = [], trg = [], links = [];
+// make a chain of nodes with local connectivity 'k'
+for (i=0; i<N-1; ++i) {
+	for (j=i+1; j<i+k && j<N; ++j) {
+		src.push(i);
+		trg.push(j);
+		links.push({source:i,target:j});
+	}
+}
+var g = dv.graph(N, src, trg);
+out(tock()+": "+N+" nodes, "+src.length+" edges");
+
+// tick();
+// var m = dv.matrix.dense(N,N);
+// for (i=0; i<src.length; ++i) {
+// 	m.set(src[i],trg[i],1);
+// 	m.set(trg[i],src[i],1);
+// }
+// out(tock()+": build adjacency matrix");
+
+tick();
+var id = dv.graph.indegree(g);
+var od = dv.graph.outdegree(g);
+var dd = dv.graph.degree(g);
+out(tock()+": (in/out/total) degrees");
+
+//tick(); var bc = dv.graph.bc(g); out(tock()+": betweenness centrality");
+tick();
+var ml = dv.cluster.community(g);
+out(tock()+": fast community cluster");
+
+var c = dv.array(N);
+//var c = dv.cluster.groups(ml);
+</script>
+
+</div></div></body>
+</html>

@@ -1,0 +1,31 @@
+<script type="text/javascript" src="../../lib/datavore/datavore-d0.1.js"></script>
+<script type="text/javascript" src="../dw-d0.1.js"></script>
+
+<script type="text/javascript" src="../../examples/data/earthquakes.js"></script>
+<script type="text/javascript" src="../../examples/data/water2.js"></script>
+<script type="text/javascript" src="../../examples/data/hospital_staffing.js"></script>
+<script type="text/javascript" src="../../examples/data/movies.js"></script>
+<script type="text/javascript" src="../../examples/data/simple.js"></script>
+<script type="text/javascript" src="../../examples/data/crime.js"></script>
+
+<script type="text/javascript">  
+
+//$(document).ready(function() {
+
+  var wrangler = dw.wrangle();
+  var table = dv.table(simple_missing);
+  // wrangler.add(dw.merge([0,1]).glue(" ... ").drop(true)).apply([table])
+  //wrangler.add(dw.cut([0]).on(/ /).max(0)).apply([table])
+  wrangler.add(dw.fold([0,1]).keys([4])).apply([table])
+  
+  
+  var parser = dw.io.inference(crime);
+  
+  parser.parse(crime);
+  
+  var io = dw.io.delimited({header_row:true});
+      io.parse("abc,def\nadlfj,aldj\n").debug();
+  
+  //  wrangler.add(dw.copy([1]).drop(false)).apply([table])
+//})
+</script>

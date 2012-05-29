@@ -1,0 +1,518 @@
+.clear { clear: both;}
+
+.ui-layout-pane{
+	padding:0px;
+}
+
+#wranglerTitleDiv{
+	font-family: 'Lucida Grande';
+	font-size: 22px;
+	font-weight: bold;
+	padding:10px 0px 0px 4px;
+/*	float:left;*/
+}
+
+#wranglerTitle1{
+	color: #D55;
+}
+
+#wranglerTitle2{
+	color: #555;
+}
+
+#wranglerHelpLink{
+	color: #555;
+	font-size:18px;
+/*	margin-top:10px;*/
+	padding-top:4px;
+	float:right;
+	margin-right:30px;
+/*	margin-left:106px;*/
+}
+	
+#profilerWestPanel{
+	overflow-y:hidden;
+	overflow-x:hidden;
+}
+
+.ui-layout-center{
+
+	overflow-y:hidden;
+	max-height:90%;
+	overflow-x:auto;
+	border-bottom:0px;
+	border-right:0px;
+
+}
+
+#table{
+	overflow-x:auto;
+	height:100%;
+}
+
+#wranglerInput{
+	display: block;
+	height: 80%;
+	margin-left: 0px;
+	margin-top: 10px;
+	width: 90%;
+}
+
+#wranglerInputSubmit{
+	float: right;
+	font-size: 20px;
+	margin-right: 10%;
+	margin-top: -2px;
+	padding: 2px 28px;
+	background-color: #3B5998;
+	border-color: #D8DFEA #0E1F5B #0E1F5B #D8DFEA;
+	border-style: solid;
+	border-width: 1px;
+	color: white;
+	cursor: pointer;
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+
+}
+
+#uploadContainer{
+	border: 0px solid #919191;
+	height: 90%;
+	margin-left: 5%;
+	margin-top: 5%;
+/*	padding: 7px 0px;*/
+	width: 90%;
+	font-family: 'Lucida Grande', Helvetica, Arial;
+}
+
+#uploadContainer select{
+	font-family: 'Lucida Grande', Helvetica, Arial;
+}
+
+#uploadPrompt, #wranglerPrompt, .exportHeader, .wranglerPrompt{
+	font-family: 'Lucida Grande', Helvetica, Arial;
+	font-size: 20px;
+	margin-left: 0px;
+	margin-top: 30px;
+	padding-top: 0px;
+	text-align: center;
+	color:black;
+}
+
+#scriptInstructions{
+
+	padding-top:15px;
+	margin-top:0px;
+
+	color:#666;
+}
+
+#uploadPrompt{
+	margin-bottom:16px;
+	text-align: left;
+}
+
+.exportHeader{
+	margin-right:50px;
+	cursor:pointer;
+	color:#999999;
+}
+
+.selectedExportHeader, .exportHeader:hover{
+	color:#000000;
+
+}
+
+/*
+.ui-corner-right {
+border-bottom-right-radius: 1px 1px;
+border-top-right-radius: 1px 1px;
+}
+
+input, input[type="password"], input[type="search"], isindex {
+-webkit-appearance: textfield;
+-webkit-rtl-ordering: logical;
+-webkit-user-select: text;
+background-color: white;
+border: 2px inset;
+cursor: auto;
+padding: 0px;
+}
+
+
+button.ui-button-icon-only {
+	width: 1em;
+	height:.8em;
+	padding-top:0px;
+	padding-bottom:0px;
+	margin-left:1px;
+	
+}
+
+.ui-button-icon-only .ui-icon, .ui-button-text-icon .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon {
+margin-top: -8px;
+position: absolute;
+top: 50%;
+}
+
+.ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text {
+padding: 0.0em;
+text-indent: -1e+07px;
+}
+.ui-widget {
+	font-family: 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 10px;
+}
+
+.ui-icon {
+background-image: url(file://localhost/Users/skandel/Documents/projects/datavore/wrangler/lib/ThemeRoller/css/redmond/images/ui-icons_469bdd_256x240.png);
+height: 14px;
+width: 14px;
+}
+
+.ui-button-icon-only .ui-icon, .ui-button-text-icon .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon {
+margin-top: -8px;
+position: absolute;
+top: 50%;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+input, input[type="password"], input[type="search"], isindex {
+-webkit-appearance: textfield;
+-webkit-rtl-ordering: logical;
+-webkit-user-select: text;
+background-color: white;
+border: 2px inset;
+cursor: auto;
+padding: 0px;
+}
+
+input[type='radio']{
+	-webkit-appearance: radio;	
+}
+
+
+
+
+
+button.ui-button-icon-only {
+width: 1.1em;
+height:1.1em;
+}
+.ui-button-icon-only {
+width: 1.1em;
+height:1.1em;
+}
+.ui-button {
+cursor: pointer;
+display: inline-block;
+margin-right: 0.1em;
+overflow: visible;
+padding: 0px;
+position: relative;
+text-align: center;
+text-decoration: none !important;
+zoom: 1;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+background: #DFEFFC url(file://localhost/Users/skandel/Documents/projects/datavore/wrangler/lib/ThemeRoller/css/redmond/images/ui-bg_glass_85_dfeffc_1x400.png) repeat-x 50% 50%;
+border: 1px solid #C5DBEC;
+color: #2E6E9E;
+font-weight: bold;
+}
+.ui-widget {
+font-family: 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-size: 12px;
+}
+
+.exportOptions {
+	font-size:18px;
+}
+
+
+
+
+#transformEditor.help{
+	padding-left:10px;
+	padding-top:6px;
+
+}
+
+.ui-layout-center.help{
+	padding-left:10px;
+	padding-top:6px;
+
+}
+
+.help{
+	font-family: 'Lucida Grande', Helvetica, Arial;
+}
+
+.ui-layout-center.help .transformName{
+	font-size:26px;
+	margin-bottom:10px;
+}
+
+.ui-layout-center.help .helpContent{
+	font-size:18px;
+	width:80%;
+	padding-left:10px;
+	margin-bottom:10px;
+}
+
+.ui-layout-center.help .helpSubHeader{
+	font-size:20px;
+	margin-bottom:5px;
+	margin-top:15px;
+}
+
+.help .helpMenu{
+	font-size:22px;
+	margin-top:4px;
+	margin-bottom:8px;
+	margin-left:10px;
+}
+
+.help .transformLink{
+	margin-bottom:8px;
+	margin-left:26px;
+	font-size:16px;
+	cursor:pointer;
+}
+
+.help .transformLink:hover{
+	color:#33F;
+}
+
+
+.help .help_image{
+	margin-top:20px;
+}
+
+.wrangler_interface_image{
+	background-image:url("images/interface.png");
+	height:450px;
+	width:900px;
+}
+
+.extractBefore_image{
+		background-image:url("images/extractBefore.png");
+		
+		height:350px;
+		width:490px;
+		margin-right:10px;
+		display:inline-block;
+
+}
+.extractAfter_image{
+		background-image:url("images/extractAfter.png");
+		height:350px;
+		width:500px;
+		display:inline-block;
+
+}
+
+/*.dataTables_wrapper{
+	overflow
+}*/
+
+.fillBefore_image{
+		background-image:url("images/fillBefore.png");
+		
+		height:350px;
+		width:560px;
+		margin-right:10px;
+		display:inline-block;
+
+}
+.fillAfter_image{
+		background-image:url("images/fillAfter.png");
+		height:350px;
+		width:560px;
+		display:inline-block;
+
+}
+
+
+.transposeAfter_image{
+		background-image:url("images/transposeAfter.png");
+		height:410px;
+		width:960px;
+		display:inline-block;
+
+}
+
+
+.deleteAfter_image{
+		background-image:url("images/deleteAfter.png");
+		height:350px;
+		width:560px;
+		display:inline-block;
+
+}
+.deleteBefore_image{
+		background-image:url("images/deleteBefore.png");
+		height:350px;
+		width:550px;
+				margin-right:10px;
+		display:inline-block;
+
+}
+
+.cutAfter_image{
+		background-image:url("images/cutAfter.png");
+		height:350px;
+		width:480px;
+		display:inline-block;
+
+}
+.cutBefore_image{
+		background-image:url("images/cutBefore.png");
+		height:350px;
+		width:550px;
+				margin-right:10px;
+		display:inline-block;
+
+}
+
+
+.promoteAfter_image{
+		background-image:url("images/promoteAfter.png");
+		height:350px;
+		width:480px;
+		display:inline-block;
+
+}
+.promoteBefore_image{
+		background-image:url("images/promoteBefore.png");
+		height:350px;
+		width:550px;
+				margin-right:10px;
+		display:inline-block;
+
+}
+
+.unfoldAfter_image{
+		background-image:url("images/unfoldAfter.png");
+		height:440px;
+		width:950px;
+				margin-right:10px;
+		display:inline-block;
+
+}
+
+.foldAfter_image{
+		background-image:url("images/foldAfter.png");
+		height:440px;
+		width:950px;
+				margin-right:10px;
+		display:inline-block;
+
+}
+
+.splitAfter_image{
+		background-image:url("images/splitAfter.png");
+		height:350px;
+		width:660px;
+		display:inline-block;
+
+}
+.splitBefore_image{
+		background-image:url("images/splitBefore.png");
+		height:350px;
+		width:450px;
+				margin-right:10px;
+		display:inline-block;
+
+}
+
+
+#wranglerHelpDiv{
+		float:right;
+			margin-top:10px;
+}
+
+#wranglerHelpDiv a{
+	color:#000000;
+	display:inline;
+
+}
+
+.wranglerExampleOptions{
+/*	margin-left:15px;*/
+	font-size:16px;
+	border: 1px solid #BDC7D8;
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+	margin-bottom:-2px;
+/*	margin-left:35%;*/
+}
+
+.demoOptions{
+	cursor:pointer;
+	font-weight:bold;
+		color:#D55;
+		
+}
+
+.demoOptions:hover{
+	color:#33F;
+}
+
+a.runtimeLink{
+	font-weight:bold;
+	color:black;
+/*	font-size:10px;*/
+}
+a.runtimeLink:hover { color: #D55; }
+
+.terminal {
+	font-family: Andale Mono, Courier New;
+	font-weight: bold;
+	font-size: 14px;
+	color: #000;
+}
+
+
+rect.valid, span.valid{
+/*	background-color:#FFF;
+	fill:#FFF;
+*/
+	background-color:#93CCA7;
+	fill:#93CCA7;
+}
+
+rect.brole, span.brole{
+	background-color:#FFC97F;
+	fill:#FFC97F;
+}
+
+rect.missing, span.missing{
+	background-color:#A8A8A8;
+	fill:#A8A8A8;
+}
+
+rect.bparse, span.bparse{
+	background-color:#FF7878;
+	fill:#FF7878;
+}
+
+rect.xaxis, span.xaxis{
+	background-color:#FEFEFE;
+	fill:#FEFEFE;
+}
+
+#dashboard_container {
+	margin-top:12px;
+}

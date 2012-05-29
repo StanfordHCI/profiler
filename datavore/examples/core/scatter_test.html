@@ -1,0 +1,152 @@
+<html>
+<head>
+    <title>Scalable Charts</title>
+    <script type="text/javascript" src="../../lib/protovis-r3.2.js"></script>
+    <script type="text/javascript" src="../../datavore-r0.1.js"></script>
+    <style>
+        html * { font-family: Monaco, Courier New; }
+        td { vertical-align: top; }
+    </style>
+</head>
+<body><div id="center"><div id="fig">
+
+<script type="text/javascript">
+
+var __t__;
+function tick() { __t__ = Date.now(); }
+function tock(n) { return ((Date.now() - __t__)/1000).toFixed(n||3); }
+function out(s) { document.write(s+"<br/>"); }
+function fx(x) { return x.toFixed(3); };
+tick();
+
+function bin(x,a) {
+	return (Math.floor(a*x)/a);
+}
+
+function sinx() {
+	var g = dv.rand.normal(0,0.05);
+	return function(i) {
+		return -2 + (i/N)*4 + g();
+	};
+}
+function siny() {
+	var g = dv.rand.normal(0,0.05);
+	return function(i) {
+		var x = -2 + (i/N)*4;
+		return Math.sin(3*Math.PI*x) + g();
+	};
+}
+
+// build data set with N entries
+var N = 200000,
+    names = ["a","x","y"],
+    am = ["a","b","c"],
+    fa = dv.rand.integer(am.length),
+    fx = dv.rand.normal(-0.1, 0.25),//sinx()
+    fy = dv.rand.normal(+0,   1.0),//siny()
+    cols = names.map(function() { return dv.array(N); });
+
+	for (var i=0; i<N; ++i) {
+		cols[0][i] = am[fa(a)];
+		cols[1][i] = Math.max(-3, Math.min(3, fx(i)));
+		cols[2][i] = Math.max(-3, Math.min(3, fy(i)));
+    }
+
+var types = ["nominal","numeric","numeric"];
+cols = cols.map(function(d,i) {
+	return {name:names[i], type:types[i], values:d};
+});
+var data = dv.table(cols);
+out("build: "+tock());
+
+function aggr(res) {
+	var q = data.query({
+		dims:[dv.bin("x",step),dv.bin("y",step)],
+//		dims:[dv.quantile("x",step),dv.quantile("y",step)],
+		vals:[dv.count("*")]
+	});
+	return q;
+}
+
+function update() {
+	step = +(document.getElementById("step").value);
+	body = document.getElementById("output");
+	tick();
+	q = aggr(step);
+	
+	ma = pv.max(q[2]);
+	mn = pv.min([pv.min(q[0]), pv.min(q[1])]);
+    mx = pv.max([pv.max(q[0]), pv.max(q[1])]);
+    sz = Math.ceil(w / Math.max(q[0].unique, q[1].unique));
+	xa.domain(mn,mx).range(0,w-sz);
+	ya.domain(mn,mx).range(w-sz,0);
+	sa.domain(0, 1, ma).range(0, 0.2, sz-1);
+	ca.domain(0, 1, ma);
+	
+	var html = "groups: "+tock()+"<br/>";
+	tick();
+	render();
+	html += "render: "+tock()+"<br/>";
+	body.innerHTML = html;
+}
+
+var ma, mn, mx, sz, w = 500, step = 0.1,//10,
+    xa = pv.Scale.linear(0, 1).range(0,w).nice(),
+    ya = pv.Scale.linear(0, 1).range(w,0).nice(),
+    ca = pv.Scale.linear(0, 1, 2).range("#fff","#eef","#33f"),
+    sa = pv.Scale.linear(0, 1, 2).range(0, 0.2, 2),
+    q = aggr(step);
+</script>
+
+<table><tr>
+<td><span id="a1"></span></td>
+<td><span id="a2"></span></td>
+</tr></table>
+
+<input id="step" type="text" maxlength="5" onchange="update();" value="0.1"/>
+
+<div id="output"></div>
+
+<script type="text/javascript+protovis">
+document.getElementById("step").value = step;
+
+var visA = new pv.Panel()
+	.canvas("a1")
+	.strokeStyle("#cccccc")
+	.width(w)
+	.height(w)
+   .add(pv.Bar)
+	.data(function() pv.range(q[0].length))
+	.left(function(i) xa(q[0][i]))
+	.top(function(i) ya(q[1][i]))
+	.width(function() sz)
+	.height(function() sz)
+	.strokeStyle(null)
+	.fillStyle(function(i) ca(q[2][i]))
+   .root;
+
+var visB = new pv.Panel()
+    .canvas("a2")
+    .strokeStyle("#cccccc")
+	.width(w)
+	.height(w)
+   .add(pv.Bar)
+	.data(function() pv.range(q[0].length))
+	.left(function(i) xa(q[0][i]))
+	.bottom(function(i) w - ya(q[1][i]) - sz)
+    .width(function() sz)
+    .height(function(i) sa(q[2][i]))
+	.strokeStyle(null)
+	.fillStyle("#88c")
+   .root;
+
+var vis = [visA, visB];
+function render() {
+	vis.forEach(function(v) { v.render(); });
+}
+
+update();
+</script>
+
+</div></div></body>
+</html>

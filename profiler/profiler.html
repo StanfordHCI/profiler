@@ -1,0 +1,203 @@
+<link type="text/css" href="../lib/themeroller/css/redmond/jquery-ui-1.8.1.custom.css" rel="stylesheet" />
+<link type="text/css" href="../lib/themeroller/plugins/selectmenu/ui.selectmenu.css" rel="stylesheet"/>
+<script type="text/javascript" src="../lib/themeroller/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../lib/themeroller/js/jquery-ui-1.8.1.custom.min.js"></script>
+
+<script type="text/javascript" src="../lib/layout/jquery.layout.min.js"></script>
+<script type="text/javascript" src="../lib/d3/d3.min.js"></script>
+<script type="text/javascript" src="../lib/d3/d3.geo.min.js"></script>
+<script type="text/javascript" src="../lib/d3/d3.time.min.js"></script>
+<script type="text/javascript" src="../lib/d3/d3.behavior.min.js"></script>
+<script type="text/javascript" src="../datavore/src/parse/import.js"></script>
+
+<script type="text/javascript" src="../lib/datavore/datavore-d0.1.js"></script>
+
+
+<script type="text/javascript" src="dp-d0.1.js"></script>
+
+<script type="text/javascript" src="../examples/data/earthquakes.js"></script>
+<script type="text/javascript" src="../examples/data/national_dl.js"></script>
+<script type="text/javascript" src="../examples/data/obesity.js"></script>
+<script type="text/javascript" src="../examples/data/quality.js"></script>
+<script type="text/javascript" src="../examples/data/urbanpop.js"></script>
+<script type="text/javascript" src="../examples/data/water2.js"></script>
+<script type="text/javascript" src="../examples/data/nuclear_status.js"></script>
+<script type="text/javascript" src="../examples/data/hospital_staffing.js"></script>
+<script type="text/javascript" src="../examples/data/movies.js"></script>
+<script type="text/javascript" src="../examples/data/simple.js"></script>
+<script type="text/javascript" src="../lib/d3/data/world-countries.js"></script>
+<script type="text/javascript" src="../lib/d3/data/us-states.js"></script>
+<style type="text/css" title="currentStyle">
+  @import "style/layout.css";
+  @import "style/style.css";
+  @import "style/profiler.css";
+</style>
+
+<script type="text/javascript">  
+
+var myLayout; 
+
+$(document).ready(function() {
+  
+  var browserName=navigator.appName;
+  
+  var isSupported = navigator.userAgent.match(/Chrome|Safari|Firefox/);
+
+  if(isSupported===null) alert('Data Profiler has only been tested in Chrome, Safari and Firefox.  For best performance, we recommend you use Chrome or Safari.')
+  
+  myLayout = $('body').layout({
+    north: {
+      spacing_open:      0,
+      resizable:         false,
+      slidable:        false,
+      fxName:          "none"
+    },
+	south: {
+	  spacing_open:      0,
+	  resizable:         false,
+	  slidable:        false,
+	  fxName:          "none"
+	},
+	west: {
+	  minSize: 310
+	}  
+  });
+})
+</script>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <!-- <link rel="shortcut icon" type="image/ico" href="abc" /> -->
+    
+    <title>DataProfiler</title>
+    
+    <!-- this below should be moved to its own file eventually -->
+    
+    
+    
+    
+  </head>
+  
+  <body id="dt_example">
+    <div class="ui-layout-north" id='wlib/datavore/examples/profile/data_test.html" title="data_testranglerNorthPanel'>
+      <div id='wranglerTitleDiv'>
+        <div class="title_inner">
+          <span id='wranglerTitle1'>Data</span><span id='wranglerTitle2'>Profiler</span>
+        </div>
+          
+        <textarea rows="2" cols="20" id="loaddata"></textarea>
+        <a href="javascript:void(0)" id="loadbutton" style="font-size:14px">load data</a>
+        
+        <div class="data_list" style="display:none">
+          <form style="margin: 0px; padding: 0px;">
+            <select id='dataselect' name="dataset">
+              <option value="water">water</option>
+              <option value="movies">movies</option>
+              <option value="quality">quality</option>
+              <option value="earthquakes">earthquakes</option>
+              <option value="national_dl">national_dl</option>
+              <option value="urbanpop">urbanpop</option>
+              <option value="hospital_staffing">hospital_staffing</option>
+              <option value="nuclear_status">nuclear_status</option>
+              <option value="obesity">obesity</option>
+            </select>
+            <!-- <input type="submit" value="submit" /> -->
+          </form>
+        </div>
+        <a href="javascript:void(0)" style="margin-left: 100px; font-size: 14px" id="autolayout">auto-layout</a>
+        <a href="javascript:void(0)" style="margin-left: 100px; font-size: 14px" id="toggle_text">hide text</a>
+        <!--
+        <a id='wranglerHelpLink' href='help.html' target="_blank">Help</a>
+        -->
+        </div>
+        
+        <div class='clear'></div>
+    </div>
+    <div class="ui-layout-west" id='profilerWestPanel'>
+    
+    </div>
+    <div class="ui-layout-center" id='ui-layout-center'>
+      <div class="spacer"></div>
+      <!--
+      <div class="droppable ui-widget-content">
+        <p>Drop here</p>
+      </div>
+      -->
+    </div>
+    <div class="ui-layout-south">
+    </div>
+  </body>
+  
+  <script>
+    $(function() {
+      jQuery('#dataselect').change(function(){
+        window.location.hash = "#"+jQuery('#dataselect').attr('value');
+        load();
+        window.location.reload();
+      })
+      
+      var load = function(){
+        var dataset_query = window.location.hash.substring(1);
+        
+        if(dataset_query == 'movies') {
+          data = movies_data;
+        }
+        else if(dataset_query == 'urbanpop') {
+          data = urbanpop_data;
+        }
+        else if(dataset_query == 'water') {
+          data = water2_data;
+        }
+        else if(dataset_query == 'quality') {
+          data = quality_data;
+        }
+        else if(dataset_query == 'earthquakes') {
+          data = earthquakes_data;
+        }
+        else if(dataset_query == 'national_dl') {
+          data = national_dl_data;
+        }
+        else if(dataset_query == 'hospital_staffing') {
+          data = hospital_staffing_data;
+        }
+        else if(dataset_query == 'nuclear_status') {
+          data = nuclear_status_data;
+        }
+        else if(dataset_query == 'obesity') {
+          data = obesity_data;
+        }
+        else {
+          dataset_query = 'water';
+          data = simple;
+        }
+        $("#dataselect").val(dataset_query);
+        
+        data_table = dv.table(data);
+        db = dp.profile(data_table);
+        var schema = dp.schema('profilerWestPanel', data);
+        init_layout(db);        
+      }
+      load();
+    });
+    
+    // Loads in JSON code into the data and repopulates the interface.
+	loadExternalDataset = function(indata) {
+	  data = indata;
+	  console.log(data);
+	  data_table = dv.table(data);
+	  db = dp.profile(data_table);
+	  var schema = dp.schema('profilerWestPanel', data);
+	  init_layout(db);
+	}
+
+    $('#loadbutton').click(function() {
+      var indata = $('#loaddata').val();
+      var arrData = csvToArray(indata);
+      var jsonData = arrayToProfilerJSON(arrData);
+      loadExternalDataset(jsonData);
+    });
+  </script>
+</html>
+

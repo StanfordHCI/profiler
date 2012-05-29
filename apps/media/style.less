@@ -1,0 +1,426 @@
+// Layout Colors
+@containerBorderColor: #EFEFEF;
+
+// Plot Colors
+/*@plotBaseColor: hsl(214, 60%, 84%);*/
+@plotBaseColor: hsl(214, 100%, 90%);
+
+@plotScatterBaseColor: hsl(214, 100%, 70%);
+@plotBrushColor: orange;
+@plotBrushOverColor: FFAA88;
+
+// Type Colors
+@typeErrorColor: #FF7878;
+@typeValidColor: #93CCA7;
+@typeMissingColor: #A8A8A8;
+
+// Label Variables
+@graphLabelColor: #222;
+/*@graphLabelColor: #000;*/
+@graphLabelSize: 10px;
+
+// heights
+@profilerHeight: 402px;
+
+// General
+body {
+	font-family: 'Lucida Grande', Helvetica, Arial;
+	color: #222;
+}
+
+text {
+	fill: @graphLabelColor;
+	stroke: none;
+	font-size: 9px;
+}
+
+// Layout
+.ui-layout-pane{
+	padding:0px;
+}
+
+#profiler_container {
+	min-width:100%;
+	max-width:100%;
+	min-height:@profilerHeight;
+	max-height:@profilerHeight;
+	margin-top: 32px;
+}
+
+#app_sidebar {
+	height: 100%;
+}
+
+#schema_title {
+	margin-top:12	px;
+	margin-left:8px;
+	margin-bottom:0px;
+}
+
+#schema_container {
+	margin-top: 4px;
+
+	border: 1px solid #EFEFEF;
+/*	border-top: 0px;
+	border-bottom: 0px;
+*//*	height: 130px; 
+	max-height: 130px;
+*/
+	height: @profilerHeight - 250; 
+	max-height: @profilerHeight - 250;
+	overflow-y: auto;
+	padding-top: 0px;
+	
+	div.jspVerticalBar {
+		visibility: visible;
+	}
+	
+	&:hover {
+		div.jspVerticalBar {
+			visibility: visible;
+		}
+	}
+}
+#related_type_select{
+width:96px
+}
+#suggestions {
+	margin-top: 15px;
+	cursor:pointer;
+	.selected_suggestion {
+		background: #D6F6F6;	
+	}
+	.suggestion_title {
+		display:inline-block;
+	}
+
+	.suggestion_routine {
+		display:inline-block;
+		margin-left:10px;
+		font-size:10px;
+		color:#666666;
+	}
+
+	.suggestion_routine:hover {
+		text-decoration:underline;
+	}
+
+	.displayed_menu {
+		display:block;
+	}
+
+	.suggestion {
+		cursor: pointer;
+		font-size: 12px;
+		&:hover {
+/*			background-color: #FFEFFF;*/
+		}
+	}
+}
+
+
+#schema_suggestion_spacer {
+	height: 0px;
+	width: 85px;
+	margin-left: 60px;
+	background-color: lightgrey;
+	margin-top: 0px;
+}
+
+// Chart
+.chart_container {
+	.label {
+		background-color: white;
+	}
+	display: inline-block;
+	position: absolute;
+  border: 1px solid @containerBorderColor;
+}
+
+.small_multiple {
+  border: 0px solid @containerBorderColor;
+  border-top: 1px solid @containerBorderColor;
+
+}
+
+
+.small_multiples_container {
+	max-height: 300px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.small_multiple {
+	position:static;
+	display:block;
+}
+
+.base {
+	fill: @plotBaseColor;
+}
+
+.scatter_base {
+	fill: @plotScatterBaseColor;
+}
+
+.brush {
+  fill: @plotBrushColor;
+}
+
+.brush_over {
+	fill: @plotBrushOverColor;
+	opacity: 1;
+}
+
+// Quality
+.error {
+	fill: @typeErrorColor;
+}
+
+.valid {
+	fill: @typeValidColor;
+}
+
+.missing {
+	fill: @typeMissingColor;
+}
+
+.bar_brush {
+  opacity: 1;
+}
+
+.background {
+	fill-opacity: .6;
+}
+
+// Schema View
+div.data_label {
+	height: 16px;
+	&:hover {
+		background-color: #EEE;
+	}
+	
+	font-size: 14px;
+	padding: 2px 4px 2px 4px;
+	cursor:pointer;
+  margin: 2px 0px 2px 0px;
+
+	.data_name {
+		position: relative;
+		top: -3px;
+		display: inline-block;
+	}
+
+	.data_menu {
+		float: right;
+		display: none;
+
+		.data_menu_text {
+			display: inline-block;
+		}
+
+		.data_menu_icon {
+			height: 10px;
+			margin-left: 1px;
+			display: inline-block;
+			background-image: url("images/rightArrow.png");
+		}
+		
+		.down {
+		    background-image: url("images/downArrow.png");
+		}
+	}
+
+}
+
+// Type Icons
+.type_icon {
+	width:16px;
+	height:16px;
+	margin-right:6px;
+	display:inline-block;	
+}
+
+.type_icon.nominal {
+	background-image: url("images/icon_bar.png");
+}
+
+.type_icon.ordinal {
+	background-image: url("images/icon_clock.png");
+}
+
+.type_icon.numeric {
+	background-image: url("images/icon_numberedlist.png");
+}
+
+.type_icon.geo, .type_icon.geo_countries, .type_icon.geo_world {
+	background-image: url("images/icon_globe.png");
+}
+
+// Wrangler Table
+#playground_table_container
+{
+	visibility: hidden;
+/*	visibility: visible;*/
+	.cell {
+		display:inline-block;
+		overflow: hidden;
+		border-right: 1px solid lightgrey;
+		border-bottom: 1px solid lightgrey;
+		min-height: 18px;
+		max-height: 18px;
+		line-height: 18px;
+		height: 18px;
+	}
+
+	.cell_content {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		min-height: 18px;
+		max-height: 18px;
+		line-height: 18px;
+		height: 18px;
+	}
+	
+	td {
+		white-space: nowrap;		
+	}
+
+	height: 400px;
+	overflow-y: hidden;
+	width: 100%;
+}
+
+
+.cluster_visualization {
+	margin-right: 20px;
+	margin-left: 10px;
+	margin-top:20px;
+	overflow-y: auto;
+	.cluster_group {
+		padding-bottom: 10px;
+	}
+}
+
+rect.context_filled{
+	fill: #FF7A00;
+		opacity:.2;
+/*  fill: hsl(240, 70%, 90%);*/
+  stroke: none;
+}
+
+
+div.data_label{
+/*  width: 200px;*/
+  	font-family: 'Lucida Grande', Helvetica, Arial;
+  	font-size: 12px;
+/*  background-color: #ccc;*/
+/*  padding: 5px;*/
+	padding-left:5px;
+	cursor:pointer;
+  	margin: 3px 3px 0px 3px;
+/*  border: 1px solid;*/
+}
+
+div.dragged {
+  position: absolute;
+  z-index: 2;
+/*  width: 150px;
+  height: 100px;
+*/  
+  background-color: #FFFFFF;
+  opacity: 1;
+  border:1px solid black;
+/*  color: #fff;*/
+
+  font-size: 20px;
+  text-align: center;
+/*  padding-top: 50px;*/
+}
+
+.drag_target{
+	background-color: #ffd;
+}
+
+.suggestion_group {
+	padding-left:18px;
+	margin-left: -10px;
+    background-image: url("images/rightArrow.png");
+	background-position:1px 3px;
+					background-repeat:no-repeat;
+	.group_type {
+		font-weight: bold;
+		cursor: pointer;
+	}
+	&.selected_group {
+	 		background-image: url("images/downArrow.png");
+
+		background-repeat:no-repeat;
+
+		.group_type {
+
+		}
+		.suggestion {
+			display: block;
+			padding-left:16px;
+			margin-left:-16px;
+			padding-top:1px;
+			padding-bottom:1px;
+		}
+	}
+	.suggestion {
+		display: none;
+	}
+}
+
+.related_view_options {
+	padding-left:12px;
+	.options_label {
+		display: inline-block;
+	}
+	.option {
+		display:inline-block;
+		cursor:pointer;
+		margin-right: 4px;
+		&.selected {
+			font-weight:bold;
+		}
+	}
+	#related_type_select {
+		margin-left:8px;
+		margin-bottom: 10px;
+	}
+}
+
+.map_region {
+	stroke: #EFEFEF;
+	fill:white;
+}
+
+.profilerScrollBar{
+	fill:white;
+}
+
+#anomaly_type_select {
+	width: 140px;
+	margin-bottom: 5px;
+	font-size:12px;
+	height: 16px;
+}
+
+#partition_select {
+	width: 85px;
+	display:inline-block;
+	margin-bottom: 5px;
+	margin-right: 10px;
+	font-size:12px;
+	height: 16px;
+}
+
+#add_partitioner_link {
+	text_decoration:underline;
+}
+
+.suggestion_menu {
+	display:none;
+}

@@ -1,0 +1,52 @@
+#upload_text_area {
+	display: block;
+	height: 80%;
+	margin-left: 0px;
+	margin-top: 10px;
+	width: 90%;
+}
+
+#upload_submit {
+  float: right;
+	font-size: 20px;
+	margin-right: 10%;
+	margin-top: -2px;
+	padding: 2px 28px;
+	background-color: #3B5998;
+	border-color: #D8DFEA #0E1F5B #0E1F5B #D8DFEA;
+	border-style: solid;
+	border-width: 1px;
+	color: white;
+	cursor: pointer;
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+}
+
+#upload_prompt, .upload_prompt, #example_prompt{
+	font-family: 'Lucida Grande', Helvetica, Arial;
+	font-size: 20px;
+	margin-left: 0px;
+	margin-top: 30px;
+	padding-top: 0px;
+	text-align: center;
+	color:black;
+	margin-bottom:16px;
+	text-align: left;
+}
+
+#upload_container select{
+  font-family: 'Lucida Grande', Helvetica, Arial;
+  font-size: 16px;
+  border: 1px solid #BDC7D8;
+  margin-bottom: -2px;
+}
+
+
+#upload_container{
+	border: 0px solid #919191;
+	height: 90%;
+	margin-left: 5%;
+	margin-top: 5%;
+/*	padding: 7px 0px;*/
+	width: 90%;
+	font-family: 'Lucida Grande', Helvetica, Arial;
+}

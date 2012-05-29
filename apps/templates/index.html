@@ -1,0 +1,120 @@
+<link type="text/css" href="../../lib/themeroller/css/redmond/jquery-ui-1.8.1.custom.css" rel="stylesheet" />
+<link type="text/css" href="../../lib/themeroller/plugins/selectmenu/ui.selectmenu.css" rel="stylesheet"/>
+
+<script type="text/javascript" src="../../lib/themeroller/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../../lib/themeroller/js/jquery-ui-1.8.1.custom.min.js"></script>
+
+<script type="text/javascript" src="../../lib/jscrollpane/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="../../lib/jscrollpane/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="../../lib/pegjs/peg.min.js"></script>
+<script type="text/javascript" src="../../lib/d3/d3.min.js"></script>
+<script type="text/javascript" src="../../lib/d3/d3.geo.min.js"></script>
+<script type="text/javascript" src="../../lib/d3/d3.time.min.js"></script>
+<script type="text/javascript" src="../../lib/d3/d3.behavior.min.js"></script>
+<script type="text/javascript" src="../../lib/datatype/datatype-d0.1.js"></script>
+<script type="text/javascript" src="../../lib/datavore/datavore-d0.1.js"></script>
+<script type="text/javascript" src="../../lib/profiler/dp-d0.1.js"></script>
+<script type="text/javascript" src="../../profiler/config/vis.js"></script>
+<script type="text/javascript" src="../../lib/wrangler/dw-d0.1.js"></script>
+<script type="text/javascript" src="../upload/upload-d0.1.js"></script>
+<script type="text/javascript" src="../playground/playground-d0.1.js"></script>
+
+<script type="text/javascript" src="../../examples/data/movies.js"></script>
+<script type="text/javascript" src="../../examples/data/movies2.js"></script>
+<script type="text/javascript" src="../../lib/d3/data/world-countries.js"></script>
+<script type="text/javascript" src="../../lib/d3/data/us-states.js"></script>
+<script type="text/javascript" src="../../lib/datatables/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css" title="currentStyle">
+  @import "../../lib/colorbrewer/colorbrewer.css";
+  @import "../../lib/jscrollpane/jquery.jscrollpane.css";
+  @import "../media/bootstrap.css";
+  @import "../media/base.css";
+  @import "../media/upload.css";
+  @import "../media/playground.css";
+  @import "../media/general.css";
+  @import "../media/style.css";
+</style>
+
+<script type="text/javascript">  
+
+var myLayout; 
+var data;
+$(document).ready(function() {
+
+  var browserName=navigator.appName;
+  
+  var isSupported = navigator.userAgent.match(/Chrome|Safari|Firefox/);
+
+  if(isSupported===null) alert('Data Profiler has only been tested in Chrome, Safari and Firefox.  For best performance, we recommend you use Chrome or Safari.')
+
+	var rand = function(x) {
+  	return Math.random() < x ? 1 : 0
+	}
+  var t = [], tu = [];
+  var start_wrangler = function(table, opt) {
+    playground.controller({data:table, suggestion_container:jQuery('#suggestions')})
+    data = table
+    // TODO Refactor schema in profile.
+  }
+
+var data_table = dv.table(movies_data);
+
+
+ upload.app({onupload:start_wrangler, debug:true, examples:[{name:'Crime', value:data_table}]});
+
+   
+  jQuery('#schema_container').jScrollPane({hideFocus:true});
+  
+	var viewTypes = ['anomalies' , 'none', 'data values'], viewTypeIndex = 0;
+	var viewTypesText = ['View: Explain Anomalies', 'View: None', 'View: Explain Values'];
+	jQuery('#suggested_view_selector').click(function() {
+		viewTypeIndex++;
+		viewTypeIndex = viewTypeIndex % viewTypes.length;
+		viewType = viewTypes[viewTypeIndex]; // 'none', 'data values'
+
+		jQuery(this).trigger('onselect', [viewType])
+		jQuery(this).html(viewTypesText[viewTypeIndex])
+
+		dw.view.related_view_type = viewType;
+	}).trigger('onselect', ['anomalies'])
+	dw.view.related_view_type = 'anomalies';
+
+
+})
+</script>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Profiler</title>
+	</head>
+  
+	<body id="main">
+		<div id="north-panel">
+			<div id="menu">
+				<ul class="nav nav-tabs">
+				</ul>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="sidebar" id="app_sidebar">
+				<div id="schema_banner">
+					<span id="schema_title">Column Browser</span>
+				</div>
+				<div id="schema_container"></div>
+				<div id="schema_suggestion_spacer"></div>
+				<div id="suggestions">
+					<div id="schema_banner">
+						<span id="schema_title">Anomaly Browser</span>
+						<span id="suggested_view_selector" class="suggested_views">View: Explain Anomalies</span>
+					</div>
+				</div>
+			</div>
+			<div class="content" id="app_container"></div>
+		</div>
+	</body>
+</html>
+

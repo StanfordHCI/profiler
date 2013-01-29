@@ -4890,6 +4890,10 @@ dp.selection = function(group, source, fields) {
   };
 
   selection.mouseover = function(d, i) {
+    var formula = selection.formula();
+    if (formula && formula.length) {
+      d3.select('#formulaView').html(formula);
+    }
     selection.select_element(d, i, {dragging:true})
   }
 
